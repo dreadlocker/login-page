@@ -1,7 +1,16 @@
-.page {
+.absoluteCenter {
   width: 98vw;
   height: 98vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.errorText {
+  color: red;
 }
