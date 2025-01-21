@@ -7,10 +7,6 @@
   align-items: center;
 }
 
-.hide {
-  opacity: 0;
-}
-
-.errorText {
-  color: red;
+.asd {
+  display: none !important;
 }

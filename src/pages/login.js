@@ -8,9 +8,9 @@ import EmailInput from "@/components/emailInput.js";
 import Button from "@/components/button.js";
 import isEmailValid from "@/assets/isEmailValid.js";
 import { useRouter } from "next/router";
-import { absoluteCenter } from "@/pages/login.module.css"; // TODO - make global class file
 import { useDispatch, useSelector } from "react-redux";
 import { savePassword, setIsAuth } from "@/redux/features/loginSlice";
+import { absoluteCenter } from "@/pages/login.module.css"; // TODO - make global class file
 
 export default function Login() {
   const dispatch = useDispatch();

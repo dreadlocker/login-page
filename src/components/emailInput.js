@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { saveEmail } from "@/redux/features/loginSlice.js";
-import { hide, errorText } from "@/pages/login.module.css";
+import { hide, errorText } from "@/components/emailInput.module.css";
 
 export default function EmailInput() {
   const dispatch = useDispatch();
