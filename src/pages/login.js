@@ -1,18 +1,38 @@
 import Form from "next/form";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import credentials from "@/validCredentials.js";
 import Success from "@/components/success.js";
-import isEmailValid from "@/helpers/isEmailValid.js";
-import { absoluteCenter, hide, errorText } from "@/pages/login.module.css";
+import EmailInput from "@/components/emailInput.js";
+import Button from "@/components/button.js";
+import isEmailValid from "@/assets/isEmailValid.js";
+import { useRouter } from "next/router";
+import { absoluteCenter } from "@/pages/login.module.css"; // TODO - make global class file
 
 export default function Login() {
-  const { validEmail, validPassword } = JSON.parse(credentials);
+  const router = useRouter();
+  const { userEmail, userPassword } = JSON.parse(credentials);
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+  // TODO - use REDUX
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hasCorrectCredentials, setHasCorrectCredentials] = useState(null);
+  // TODO - use REDUX
+
+  useEffect(() => {
+    let timer = null;
+    if (hasCorrectCredentials) {
+      timer = setTimeout(() => {
+        // TODO - change isUserLogged in REDUX to true
+        router.replace("/");
+      }, 5000);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [hasCorrectCredentials, router]);
 
   const onEmailChange = (e) => {
     setEmail(e.target.value);
@@ -23,10 +43,11 @@ export default function Login() {
   const onCredentialCheck = () => {
     if (
       !isEmailValid(email) ||
-      email !== validEmail ||
-      password !== validPassword
+      email !== userEmail ||
+      password !== userPassword
     ) {
       setHasCorrectCredentials(false);
+      // TODO - change isUserLogged in REDUX to false
       return;
     }
 
@@ -35,19 +56,11 @@ export default function Login() {
 
   return !hasCorrectCredentials ? (
     <Form action={onCredentialCheck} className={absoluteCenter}>
-      <input
-        onChange={onEmailChange}
-        value={email}
-        name="email"
-        placeholder="Email"
+      <EmailInput
+        onEmailChange={onEmailChange} // TODO - after REDUX move to EmailInput
+        email={email} // TODO - after REDUX save it there
+        hasCorrectCredentials={hasCorrectCredentials} // TODO - after REDUX save it there
       />
-      <div
-        className={`${errorText}${
-          hasCorrectCredentials === false ? "" : ` ${hide}`
-        }`}
-      >
-        Wrong email or password!
-      </div>
       <input
         onChange={onPasswordChange}
         value={password}
@@ -55,10 +68,11 @@ export default function Login() {
         type="password"
         placeholder="Password"
       />
-      <button type="submit">Login</button>
+      {/* TODO - use different languages ON ALL STRINGS */}
+      <Button text={"Login"} />
       <Link href="/forgotten-password">Forgot Password</Link>
     </Form>
   ) : (
-    <Success text={"Successful login."} />
+    <Success text={"Successful login."} /> // TODO - after REDUX save it there
   );
 }

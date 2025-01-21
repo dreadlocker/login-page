@@ -1,6 +1,6 @@
 const credentials = {
-  validEmail: "asd@abv.bg",
-  validPassword: "dsa",
+  userEmail: "asd@abv.bg",
+  userPassword: "dsa",
 };
 
 export default JSON.stringify(credentials);
