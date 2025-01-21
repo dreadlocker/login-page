@@ -1,8 +1,6 @@
-import { absoluteCenter } from "@/pages/login.module.css";
-
 export default function Success({ text = "Success" }) {
   return (
-    <div className={absoluteCenter}>
+    <div className="absoluteCenter">
       <div>{text}</div>
       <br />
       {/* TODO - after REDUX save it there */}

@@ -6,7 +6,6 @@ import Button from "@/components/button.js";
 import isEmailValid from "@/assets/isEmailValid.js";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { absoluteCenter } from "@/pages/login.module.css";
 import { setIsAuth } from "@/redux/features/loginSlice";
 
 export default function ForgottenPassword() {
@@ -39,7 +38,7 @@ export default function ForgottenPassword() {
   };
 
   return !isValidEmail ? (
-    <Form action={onEmailCheck} className={absoluteCenter}>
+    <Form action={onEmailCheck} className="absoluteCenter">
       <EmailInput />
       <Button text={"Submit"} /> {/* TODO - use different languages */}
     </Form>
