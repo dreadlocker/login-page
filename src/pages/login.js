@@ -38,7 +38,9 @@ export default function Login() {
     dispatch(savePassword(e.target.value));
   };
 
-  const onCredentialCheck = () => {
+  const onCredentialCheck = (e) => {
+    e.preventDefault();
+
     if (
       !isEmailValid(email) ||
       email !== userEmail ||
@@ -52,7 +54,7 @@ export default function Login() {
   };
 
   return !isAuth ? (
-    <Form action={onCredentialCheck} className="absoluteCenter">
+    <Form onSubmit={onCredentialCheck} className="absoluteCenter">
       <EmailInput />
       <input
         onChange={onPasswordChange}

@@ -27,7 +27,9 @@ export default function ForgottenPassword() {
     };
   }, [isValidEmail, router]);
 
-  const onEmailCheck = () => {
+  const onEmailCheck = (e) => {
+    e.preventDefault();
+
     if (!isEmailValid(email)) {
       setIsValidEmail(false);
       dispatch(setIsAuth(false));
@@ -38,7 +40,7 @@ export default function ForgottenPassword() {
   };
 
   return !isValidEmail ? (
-    <Form action={onEmailCheck} className="absoluteCenter">
+    <Form onSubmit={onEmailCheck} className="absoluteCenter">
       <EmailInput />
       <Button text={"Submit"} /> {/* TODO - use different languages */}
     </Form>
