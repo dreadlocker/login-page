@@ -1,3 +1,4 @@
+"use client";
 import Form from "next/form";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -8,23 +9,23 @@ import Button from "@/components/button.js";
 import isEmailValid from "@/assets/isEmailValid.js";
 import { useRouter } from "next/router";
 import { absoluteCenter } from "@/pages/login.module.css"; // TODO - make global class file
+import { useDispatch, useSelector } from "react-redux";
+import { savePassword, setIsAuth } from "@/redux/features/loginSlice";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const router = useRouter();
+  const { isAuth, email, password } = useSelector(
+    (state) => state.loginReducer
+  );
+
   const { userEmail, userPassword } = JSON.parse(credentials);
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  // TODO - use REDUX
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [hasCorrectCredentials, setHasCorrectCredentials] = useState(null);
-  // TODO - use REDUX
-
   useEffect(() => {
     let timer = null;
-    if (hasCorrectCredentials) {
+    if (isAuth) {
       timer = setTimeout(() => {
-        // TODO - change isUserLogged in REDUX to true
         router.replace("/");
       }, 5000);
     }
@@ -32,35 +33,28 @@ export default function Login() {
     return () => {
       clearTimeout(timer);
     };
-  }, [hasCorrectCredentials, router]);
+  }, [dispatch, isAuth, router]);
 
-  const onEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
   const onPasswordChange = (e) => {
-    setPassword(e.target.value);
+    dispatch(savePassword(e.target.value));
   };
+
   const onCredentialCheck = () => {
     if (
       !isEmailValid(email) ||
       email !== userEmail ||
       password !== userPassword
     ) {
-      setHasCorrectCredentials(false);
-      // TODO - change isUserLogged in REDUX to false
+      dispatch(setIsAuth(false));
       return;
     }
 
-    setHasCorrectCredentials(true);
+    dispatch(setIsAuth(true));
   };
 
-  return !hasCorrectCredentials ? (
+  return !isAuth ? (
     <Form action={onCredentialCheck} className={absoluteCenter}>
-      <EmailInput
-        onEmailChange={onEmailChange} // TODO - after REDUX move to EmailInput
-        email={email} // TODO - after REDUX save it there
-        hasCorrectCredentials={hasCorrectCredentials} // TODO - after REDUX save it there
-      />
+      <EmailInput />
       <input
         onChange={onPasswordChange}
         value={password}

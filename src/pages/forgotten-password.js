@@ -5,14 +5,15 @@ import EmailInput from "@/components/emailInput.js";
 import Button from "@/components/button.js";
 import isEmailValid from "@/assets/isEmailValid.js";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import { absoluteCenter } from "@/pages/login.module.css";
+import { setIsAuth } from "@/redux/features/loginSlice";
 
 export default function ForgottenPassword() {
+  const dispatch = useDispatch();
   const router = useRouter();
-  // TODO - use REDUX
-  const [email, setEmail] = useState("");
+  const { email } = useSelector((state) => state.loginReducer);
   const [isValidEmail, setIsValidEmail] = useState(null);
-  // TODO - use REDUX
 
   useEffect(() => {
     let timer = null;
@@ -27,13 +28,10 @@ export default function ForgottenPassword() {
     };
   }, [isValidEmail, router]);
 
-  const onEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
   const onEmailCheck = () => {
     if (!isEmailValid(email)) {
       setIsValidEmail(false);
+      dispatch(setIsAuth(false));
       return;
     }
 
@@ -42,11 +40,7 @@ export default function ForgottenPassword() {
 
   return !isValidEmail ? (
     <Form action={onEmailCheck} className={absoluteCenter}>
-      <EmailInput
-        onEmailChange={onEmailChange} // TODO - after REDUX move to EmailInput
-        email={email} // TODO - after REDUX save it there
-        hasCorrectCredentials={isValidEmail} // TODO - after REDUX save it there
-      />
+      <EmailInput />
       <Button text={"Submit"} /> {/* TODO - use different languages */}
     </Form>
   ) : (

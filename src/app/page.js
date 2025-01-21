@@ -1,11 +1,12 @@
+"use client";
 import { page } from "@/app/page.module.css";
 import { redirect } from "next/navigation";
 
 export default function Home() {
   // TODO - use REDUX
-  const isUserLogged = false;
+  const isAuth = false;
   // TODO - use REDUX
-  if (!isUserLogged) {
+  if (!isAuth) {
     redirect("/login");
     return;
   }
