@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { saveEmail } from "@/redux/features/loginSlice.js";
 import { hide, errorText } from "@/components/emailInput.module.css";
+import { useTranslations } from "next-intl";
 
 export default function EmailInput() {
   const dispatch = useDispatch();
   const { email, isAuth } = useSelector((state) => state.loginReducer);
+  const t = useTranslations("Main");
 
   const onEmailChange = (e) => {
     dispatch(saveEmail(e.target.value));
@@ -16,11 +18,11 @@ export default function EmailInput() {
         onChange={onEmailChange}
         value={email}
         name="email"
-        placeholder="Email"
+        placeholder={t("email")}
+        autoFocus
       />
       <div className={`${errorText}${isAuth === false ? "" : ` ${hide}`}`}>
-        {/* TODO - use different languages ON ALL STRINGS */}
-        Wrong email or password!
+        {t("wrongCredentials")}
       </div>
     </>
   );

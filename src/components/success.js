@@ -1,10 +1,15 @@
-export default function Success({ text = "Success" }) {
+import { useTranslations } from "next-intl";
+import { useSelector } from "react-redux";
+
+export default function Success() {
+  const t = useTranslations("Main");
+  const { successMes } = useSelector((state) => state.loginReducer);
+
   return (
-    <div className="absoluteCenter">
-      <div>{text}</div>
+    <div className="absolute-center">
+      <div>{successMes}</div>
       <br />
-      {/* TODO - after REDUX save it there */}
-      <div>You will be redirected shortly.</div>
+      <div>{t("toBeRedirected")}</div>
     </div>
   );
 }

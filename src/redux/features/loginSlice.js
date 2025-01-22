@@ -4,6 +4,7 @@ const initialState = {
   isAuth: null,
   email: "",
   password: "",
+  successMes: "Success",
 };
 
 export const loginSlice = createSlice({
@@ -19,8 +20,12 @@ export const loginSlice = createSlice({
     setIsAuth: (state, action) => {
       state.isAuth = action.payload;
     },
+    setSuccessMes: (state, action) => {
+      state.successMes = action.payload;
+    },
   },
 });
 
-export const { saveEmail, savePassword, setIsAuth } = loginSlice.actions;
+export const { saveEmail, savePassword, setIsAuth, setSuccessMes } =
+  loginSlice.actions;
 export default loginSlice.reducer;
