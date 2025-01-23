@@ -1,7 +1,7 @@
 "use client";
 import Form from "next/form";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import credentials from "@/validCredentials.js";
 import Success from "@/components/Success.js";
 import EmailInput from "@/components/EmailInput.js";
