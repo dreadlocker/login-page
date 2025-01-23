@@ -17,13 +17,11 @@ export default async function LocaleLayout({ children, params }) {
         {notFound ? (
           <div>Wrong page!</div>
         ) : (
-          <>
-            <StoreProvider
-              components={children}
-              messages={messages}
-              locale={locale}
-            />
-          </>
+          <StoreProvider
+            components={children}
+            messages={messages}
+            locale={locale}
+          />
         )}
       </body>
     </html>

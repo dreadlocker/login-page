@@ -1,14 +1,14 @@
 {
-    "Main": {
-        "homePage": "Home Page",
-        "email": "Email",
-        "password": "Password",
-        "login": "Login",
-        "forgottenPassword": "Forgotten Password",
-        "wrongCredentials": "Wrong email or password!",
-        "successfulLogin": "Successful login.",
-        "submit": "Submit",
-        "passReset": "Email for password reset was sent.",
-        "toBeRedirected": "You will be redirected shortly."
-    }
+  "Main": {
+    "homePage": "Home Page",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "forgottenPassword": "Forgotten Password",
+    "wrongCredentials": "Wrong email or password!",
+    "successfulLogin": "Successful login.",
+    "submit": "Submit",
+    "passReset": "Email for password reset was sent.",
+    "toBeRedirected": "You will be redirected shortly."
+  }
 }

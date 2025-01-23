@@ -15,20 +15,22 @@ const HomePage = () => {
   // Use useEffect to ensure that the router is only accessed after the component is mounted on the client side
   useEffect(() => {
     setIsClient(true);
-  }, []);
+
+    if (!isAuth) {
+      if (router && router.replace && isClient) {
+        router.replace(`${pathname}/login`);
+        return;
+      }
+    }
+  }, [isAuth, isClient, pathname, router]);
 
   if (!isClient) {
     return null; // Optionally render a loading state or nothing before the client-side JS is available
   }
 
-  if (!isAuth) {
-    if (router && router.replace) {
-      router.replace(`${pathname}/login`);
-      return;
-    }
-  }
-
-  return <div className="absolute-center">{t("homePage")}</div>;
+  return (
+    isAuth && isClient && <div className="absolute-center">{t("homePage")}</div>
+  );
 };
 
 export default HomePage;
