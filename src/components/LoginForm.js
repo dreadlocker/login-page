@@ -6,16 +6,13 @@ import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { useTranslations } from "next-intl";
 import useCredentials from "@/customHooks/useCredentials";
+import usePathToForgottenPassword from "@/customHooks/usePathToForgottenPassword";
 
 export default function LoginForm() {
   const { password } = useSelector((state) => state.loginReducer);
-  const t = useTranslations("Main");
-  const pathname = usePathname();
   const { onPasswordChange, onCredentialCheck } = useCredentials();
-
-  const paths = pathname.split("/");
-  paths[paths.length - 1] = "forgotten-password";
-  const pathToForgottenPassword = paths.join("/");
+  const { pathToForgottenPassword } = usePathToForgottenPassword();
+  const t = useTranslations("Main");
 
   return (
     <Form onSubmit={onCredentialCheck} className="absolute-center">
