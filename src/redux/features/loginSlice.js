@@ -5,6 +5,7 @@ const initialState = {
   email: "",
   password: "",
   successMes: "Success",
+  isValidEmail: null,
 };
 
 export const loginSlice = createSlice({
@@ -23,9 +24,17 @@ export const loginSlice = createSlice({
     setSuccessMes: (state, action) => {
       state.successMes = action.payload;
     },
+    setIsValidEmail: (state, action) => {
+      state.isValidEmail = action.payload;
+    },
   },
 });
 
-export const { saveEmail, savePassword, setIsAuth, setSuccessMes } =
-  loginSlice.actions;
+export const {
+  saveEmail,
+  savePassword,
+  setIsAuth,
+  setSuccessMes,
+  setIsValidEmail,
+} = loginSlice.actions;
 export default loginSlice.reducer;
