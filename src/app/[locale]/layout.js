@@ -1,6 +1,7 @@
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import StoreProvider from "@/components/StoreProvider";
+import ErrorPage from "@/app/[locale]/[...slug]/page.js";
 import "@/styles/globals.css"; // Import your global styles
 
 export default async function LocaleLayout({ children, params }) {
@@ -15,7 +16,7 @@ export default async function LocaleLayout({ children, params }) {
     <html lang={locale}>
       <body>
         {notFound ? (
-          <div>Wrong page!</div>
+          <ErrorPage />
         ) : (
           <StoreProvider
             components={children}

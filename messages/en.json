@@ -9,6 +9,8 @@
     "successfulLogin": "Successful login.",
     "submit": "Submit",
     "passReset": "Email for password reset was sent.",
-    "toBeRedirected": "You will be redirected shortly."
+    "toBeRedirected": "You will be redirected shortly.",
+    "404Header": "404 - Page Not Found",
+    "404Link": "Go back to the Home Page"
   }
 }
