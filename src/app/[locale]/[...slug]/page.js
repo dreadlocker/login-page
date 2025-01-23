@@ -7,9 +7,7 @@ export default function Custom404() {
   return (
     <div className="absolute-center">
       <h1>{t("404Header")}</h1>
-      <Link href="/">
-        <span>{t("404Link")}</span>
-      </Link>
+      <Link href="/">{t("404Link")}</Link>
     </div>
   );
 }
